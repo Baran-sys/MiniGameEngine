@@ -1,8 +1,10 @@
 public class Enemy {
     int HP;
     int DMG;
+    public String name;
 
-    public Enemy(int hp, int damage) {
+    public Enemy(String name, int hp, int damage) {
+        this.name = name;
         this.HP = hp;
         this.DMG = damage;
     }

@@ -2,7 +2,7 @@ public class Knight extends Player {
     public Knight(String nickname) {
         super(nickname);
         this.className = "Knight";
-        this.maxHealth = 12;
+        this.maxHealth = 15;
         this.health = this.maxHealth;
         this.damage = 3;
     }
@@ -16,15 +16,17 @@ public class Knight extends Player {
         return true;
     }
 
+    @Override
     public boolean heal() {
         if (this.health < this.maxHealth) {
-            this.health += 1;
-            System.out.println("You healed; Your new HP is: " + this.health);
+            this.health += 4;
+            if (this.health > this.maxHealth) this.health = this.maxHealth;
+            System.out.println("You took a deep breath (Second Wind)! Your health was restored by +4. New HP: " + this.health);
+            return true;
         } else {
-            System.out.println("Your HP is already max, you cannot heal more than that.");
+            System.out.println("Your HP is already full, you can't heal more.");
             return false;
         }
-        return true;
     }
 
     public void getHit(Enemy enemy){
@@ -35,5 +37,18 @@ public class Knight extends Player {
     public void showProfile() {
         System.out.println("\nProfile: " + this.nickname + " " + this.className + " HP|"
                 + this.health + " DMG|" + this.damage + "\n");
+    }
+
+    @Override
+    public boolean specialAbility(Enemy enemy) {
+        if (this.ultimateCooldown == 0) {
+            int ultimateDamage = this.damage * 3;
+            enemy.takeDamage(ultimateDamage);
+            this.ultimateCooldown = 3;
+            System.out.println("ULTIMATE: You hit " + ultimateDamage + " damage with HOLY SWROD! (3 round cooldown)");
+            return true;
+        }
+        System.out.println("The ability isn't ready yet! The remaining round: " + this.ultimateCooldown);
+        return false;
     }
 }
