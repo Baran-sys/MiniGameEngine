@@ -35,4 +35,9 @@ public abstract class PlayerDecorator extends Player {
     public void showProfile() {
         wrappedPlayer.showProfile();
     }
+
+    @Override
+    public boolean specialAbility(Enemy enemy) {
+        return wrappedPlayer.specialAbility(enemy);
+    }
 }

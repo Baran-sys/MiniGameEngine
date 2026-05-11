@@ -4,10 +4,10 @@ public class Archer extends Player{
     public Archer(String nickname) {
         super(nickname);
         this.className = "Archer";
-        this.maxHealth = 10;
+        this.maxHealth = 12;
         this.health = this.maxHealth;
         this.damage = 4;
-        this.leftArrow = 5;
+        this.leftArrow = 6;
     }
 
     public boolean attack(Enemy enemy){
@@ -27,15 +27,18 @@ public class Archer extends Player{
         return true;
     }
 
-    public boolean heal(){
+    @Override
+    public boolean heal() {
         if (this.health < this.maxHealth) {
-            this.health += 1;
-            System.out.println("You healed; Your new HP is: " + this.health);
+            this.health += 2;
+            if (this.health > this.maxHealth) this.health = this.maxHealth;
+            this.leftArrow += 2;
+            System.out.println("You tactically retreated! Your health has been restored by +2 and you found 2 arrows around. Total Arrows: " + this.leftArrow);
+            return true;
         } else {
-            System.out.println("Your HP is already max, you cannot heal more than that.");
+            System.out.println("Your HP is already full, you can't heal more.");
             return false;
         }
-        return true;
     }
 
     public void getHit(Enemy enemy){
@@ -48,4 +51,17 @@ public class Archer extends Player{
                 + this.health + " DMG|" + this.damage + " A|" + this.leftArrow + "\n");
     }
 
+    @Override
+    public boolean specialAbility(Enemy enemy) {
+        if (this.ultimateCooldown == 0 && this.leftArrow > 0) {
+            int totalDamage = this.leftArrow * this.damage;
+            enemy.takeDamage(totalDamage);
+            System.out.println("ULTIMATE: Arrow Rain! You shoot your " + this.leftArrow + " arrow at the same time: " + totalDamage + " damage!");
+            this.leftArrow = 0;
+            this.ultimateCooldown = 5;
+            return true;
+        }
+        System.out.println("You don't have any arrow or your ability is in cooldown!");
+        return false;
+    }
 }
