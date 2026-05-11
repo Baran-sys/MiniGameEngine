@@ -2,15 +2,13 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Game {
-    public static void play(Player p) {
+    public static void play(Player p, Scanner input) {
         if (p.health <= 0) {
             System.out.println("You don't have a profile, please restart game and actually create one.");
             return;
         }
 
         int count = 0;
-
-        Scanner input = new Scanner(System.in);
         Random rand = new Random();
         int enemyHP = rand.nextInt(5) + 6;
         int enemyDM = rand.nextInt(5) + 1;
