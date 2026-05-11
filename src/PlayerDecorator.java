@@ -11,5 +11,28 @@ public abstract class PlayerDecorator extends Player {
         this.damage = p.damage;
     }
 
+    @Override
+    public int getDamage() {
+        return wrappedPlayer.getDamage();
+    }
 
+    @Override
+    public boolean attack(Enemy enemy) {
+        return wrappedPlayer.attack(enemy);
+    }
+
+    @Override
+    public boolean heal() {
+        return wrappedPlayer.heal();
+    }
+
+    @Override
+    public void getHit(Enemy enemy) {
+        wrappedPlayer.getHit(enemy);
+    }
+
+    @Override
+    public void showProfile() {
+        wrappedPlayer.showProfile();
+    }
 }
