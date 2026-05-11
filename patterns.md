@@ -58,3 +58,45 @@ classDiagram
     
     PlayerFactory ..> Player : creates
     Main ..> PlayerFactory : uses
+
+## Phase 2: Structural Patterns
+
+**Pattern Used:** Decorator
+**Implemented in:** `PlayerDecorator.java`, `DMGBuff.java`, `HPBuff.java`
+
+### 1. The Problem
+Adding items or buffs (like a sword or shield) to characters by creating new subclasses (e.g., `KnightWithSword`, `ArcherWithShield`) would lead to a "Class Explosion." We needed a way to dynamically add responsibilities to individual objects at runtime without altering the structure of the existing `Player` classes.
+
+### 2. The Solution
+We used the **Decorator Pattern**. We created an abstract `PlayerDecorator` that both `extends Player` (to be compatible with the game engine) and holds a reference to a `Player` object (composition). Specific buffs like `DMGBuff` and `HPBuff` extend this decorator, modifying the stats (like `damage` or `health`) and the `className` before passing the calls to the wrapped object. This allows us to stack multiple buffs easily if needed.
+
+### 3. UML Class Diagram Update
+
+```mermaid
+classDiagram
+    class Player {
+        <<abstract>>
+        +String nickname
+        +String className
+        +int health
+        +int damage
+    }
+
+    class PlayerDecorator {
+        <<abstract>>
+        #Player wrappedPlayer
+        +PlayerDecorator(Player p)
+    }
+
+    class DMGBuff {
+        +DMGBuff(Player p)
+    }
+    
+    class HPBuff {
+        +HPBuff(Player p)
+    }
+
+    Player <|-- PlayerDecorator : extends
+    PlayerDecorator o-- Player : wraps
+    PlayerDecorator <|-- DMGBuff : extends
+    PlayerDecorator <|-- HPBuff : extends
