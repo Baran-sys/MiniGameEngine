@@ -1,17 +1,13 @@
-public class Player {
+public abstract class Player {
     String nickname;
-    String Class;
+    String className;
     int damage;
     int maxHealth;
     int health;
-    int leftArrow;
-    int shield;
-    int maxShield;
 
-    public Player(String nickname, String Class) {
-        this.nickname = nickname;
-        this.Class = Class;
-
+    public Player(String nickname) {
+       this.nickname = nickname;
+/*
         if(Class.equals("Knight")){
             this.health = 12;
             this.maxHealth = health;
@@ -37,6 +33,6 @@ public class Player {
         else {
             System.out.println("Wrong class name input..");
             return;
-        }
+        }*/
     }
 }
