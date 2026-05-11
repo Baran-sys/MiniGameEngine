@@ -100,3 +100,14 @@ classDiagram
     PlayerDecorator o-- Player : wraps
     PlayerDecorator <|-- DMGBuff : extends
     PlayerDecorator <|-- HPBuff : extends
+
+## Phase 3: Behavioral Patterns
+
+**Pattern Used:** Strategy / Polymorphism (Tell, Don't Ask Principle)
+**Implemented in:** `Game.java`, `Player.java` and its subclasses.
+
+### 1. The Problem
+The `Game` class was acting as a micromanager. It used large `switch-case` blocks and type casting (e.g., `((Archer)p).leftArrow`) to determine how each character should attack or take damage. This made the `Game` class tightly coupled to every specific character class, violating the Single Responsibility Principle.
+
+### 2. The Solution
+We refactored the system using Polymorphism and the "Tell, Don't Ask" principle. We introduced an `Enemy` class to represent the opponent. We moved the combat logic (`attack`, `heal`, `getHit`) directly into the specific subclasses (`Knight`, `Archer`, `Tank`). Now, the `Game` class simply issues a command (`p.attack(enemy)`), and each character executes its own specific strategy (e.g., the Knight sharpens his sword, the Archer uses arrows). We also implemented getter methods to ensure dynamic stats from Decorators are read correctly.
