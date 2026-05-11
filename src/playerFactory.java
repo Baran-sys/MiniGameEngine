@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class playerFactory {
     public static Player createPlayer(String nickname, int playerClass) {
         if (playerClass == 1) return new Knight(nickname);
