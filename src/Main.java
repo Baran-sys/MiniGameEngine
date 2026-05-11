@@ -47,5 +47,6 @@ public class Main {
         }
 
         Game.play(p, input, rand);
+        input.close();
     }
 }
