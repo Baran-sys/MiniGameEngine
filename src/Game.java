@@ -38,7 +38,7 @@ public class Game {
 
             int count = 0;
 
-            while (p.health > 0 && e.HP > 0) {
+            while (p.getHealth()> 0 && e.HP > 0) {
                 p.showProfile();
 
                 if (count % 2 == 0) {
@@ -66,7 +66,7 @@ public class Game {
                 }
             }
 
-                if (p.health <= 0) {
+                if (p.getHealth() <= 0) {
                     System.out.println(RED + "\n __   __  _______  __   __    ______   ___   _______  ______  ");
                     System.out.println("|  | |  ||       ||  | |  |  |      | |   | |       ||      | ");
                     System.out.println("|  |_|  ||   _   ||  | |  |  |  _    ||   | |    ___||  _    |");
@@ -85,7 +85,7 @@ public class Game {
                 if (choice == 1) {
                     stage++;
                     p.health += 3;
-                    if (p.health > p.maxHealth) p.health = p.maxHealth;
+                    if (p.getHealth() < p.getMaxHealth()) p.setHealth(p.getHealth() + 3);
                     System.out.println("You rested for a moment. HP restored by 3.");
                 } else {
                     System.out.println("You retired as a legendary hero at Stage " + stage + "!");

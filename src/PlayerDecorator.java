@@ -15,6 +15,14 @@ public abstract class PlayerDecorator extends Player {
     public int getDamage() {
         return wrappedPlayer.getDamage();
     }
+    @Override
+    public int getHealth() { return wrappedPlayer.getHealth(); }
+
+    @Override
+    public void setHealth(int health) { wrappedPlayer.setHealth(health); }
+
+    @Override
+    public int getMaxHealth() { return wrappedPlayer.getMaxHealth(); }
 
     @Override
     public boolean attack(Enemy enemy) {
