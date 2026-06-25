@@ -12,13 +12,13 @@ public class Archer extends Player{
 
     public boolean attack(Enemy enemy){
         if (this.leftArrow == 0) {
-            enemy.HP--;
+            enemy.takeDamage(1);
             System.out.println("You have 0 arrows left so you grabbed your knife.\n" +
                     "You hit enemy 1 damage, Enemy HP left is: " + enemy.HP);
         }
         if (this.leftArrow > 0) {
             this.leftArrow--;
-            enemy.HP -= this.damage;
+            enemy.takeDamage(this.damage);
             System.out.println("You have " + this.leftArrow + " arrows left.");
             System.out.println("You hit enemy " + this.damage + " damage," +
                     " Enemy HP left is:" + enemy.HP);
@@ -54,9 +54,9 @@ public class Archer extends Player{
     @Override
     public boolean specialAbility(Enemy enemy) {
         if (this.ultimateCooldown == 0 && this.leftArrow > 0) {
-            int totalDamage = this.leftArrow * this.damage;
-            enemy.takeDamage(totalDamage);
-            System.out.println("ULTIMATE: Arrow Rain! You shoot your " + this.leftArrow + " arrow at the same time: " + totalDamage + " damage!");
+            int ultimateDamage = this.leftArrow * this.damage;
+            enemy.takeDamage(ultimateDamage);
+            System.out.println("ULTIMATE: Arrow Rain! You shoot your " + this.leftArrow + " arrow at the same time: " + ultimateDamage + " damage!");
             this.leftArrow = 0;
             this.ultimateCooldown = 5;
             return true;

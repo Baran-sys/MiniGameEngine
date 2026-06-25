@@ -14,7 +14,7 @@ public class Tank extends Player{
     }
 
     public boolean attack(Enemy enemy){
-        enemy.HP -= this.damage;
+        enemy.takeDamage(this.damage);
         System.out.println("You hit enemy " + this.damage + " damage," +
                 " Enemy HP left is:" + enemy.HP);
         return true;

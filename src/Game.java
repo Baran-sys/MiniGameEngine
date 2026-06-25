@@ -84,9 +84,10 @@ public class Game {
 
                 if (choice == 1) {
                     stage++;
-                    p.health += 3;
-                    if (p.getHealth() < p.getMaxHealth()) p.setHealth(p.getHealth() + 3);
-                    System.out.println("You rested for a moment. HP restored by 3.");
+                    int newHealth = Math.min(p.getHealth() + 3, p.getMaxHealth());
+                    int amountHealed = newHealth - p.getHealth();
+                    p.setHealth(newHealth);
+                    System.out.println("You rested for a moment. HP restored by " + amountHealed + ".");
                 } else {
                     System.out.println("You retired as a legendary hero at Stage " + stage + "!");
                     playing = false;
